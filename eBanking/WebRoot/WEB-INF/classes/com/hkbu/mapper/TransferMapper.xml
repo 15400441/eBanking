@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hkbu.mapper.TransferMapper" >
+
+   
+  	
+  	<select id="getEmail" parameterType="java.lang.String"
+  		 resultType="java.lang.String">
+  		
+  		select c.email from customer c, account a where c.id=a.cusId and a.accNo=#{accNo}
+  	</select>
+  	
+  	<select id="getCount" parameterType="string"
+  		 resultType="int">
+  		
+  		select count(*) from transfer t where  (t.accOutNo=#{0} or t.accInNo=#{0})  and t.tranDate between #{1} and #{2}
+  	</select>
+  	
+  	<select id="findPageRecords" parameterType="object"
+  		 resultType="HashMap">
+  		
+  		select * from transfer t where  (t.accOutNo=#{0} or t.accInNo=#{0})  and t.tranDate between #{3} and #{4} order by t.tranDate  limit #{1},#{2}
+  	</select>
+  	
+  	<select id="getTransfer" parameterType="object"
+  		 resultType="HashMap">
+
+  		select * from transfer t where  (t.accOutNo=#{0} or t.accInNo=#{0})  and t.tranDate between #{1} and #{2} order by t.tranDate 
+  	</select>
+  	
+  	
+  	
+</mapper>
